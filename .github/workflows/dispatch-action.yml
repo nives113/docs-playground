@@ -1,0 +1,18 @@
+name: Dispatcher
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch:
+    name: Dispatch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch to workflows
+      runs-on: ubuntu-latest
+      run: |
+        curl -H "Accept: application/vnd.github.everest-preview+json" \
+        -H "Authorization: token ${{ secrets.AUTH_TOKEN }}" \
+        --request POST \
+        --data '{"event_type": "docs_update"}}' \
+        https://api.github.com/repos/infobip/infobip-docs-generator/dispatches
